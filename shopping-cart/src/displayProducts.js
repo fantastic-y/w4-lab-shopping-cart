@@ -4,6 +4,7 @@ import { Modal } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 function Shopping(props) {
+  const { shoppinglists } = props;
   const [show, setShow] = useState(false);
   const [showImage, setShowImage] = useState({});
 
@@ -18,7 +19,9 @@ function Shopping(props) {
       <div id="sort-price" class="center-screen">
         <p>Sort Price By: 
           <span class="sort-button">
-            <select name="sort">
+            <select
+              name="sort"
+              onChange={(e) => props.onSort(shoppinglists, e.target.value)}>
               <option value="normal">Normal</option>
               <option value="lowest">Lowest</option>
               <option value="highest">Highest</option>
@@ -29,7 +32,7 @@ function Shopping(props) {
       </div>
       
       <ListGroup>
-        {props.shoppinglists.map((shoppinglist) => (
+        {shoppinglists.map((shoppinglist) => (
           <ListGroupItem key={shoppinglist.id}>
             <h5>{shoppinglist.desc}
               <span class="price">${shoppinglist.price}</span>

@@ -12,7 +12,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      sortType: "asc",
+      sortType: "",
       listNum: "",
       itemLists: ItemData
     };
@@ -32,6 +32,17 @@ class App extends Component {
     }
   };
 
+  onSort = (listNum, sortType) => {
+    listNum.sort((a,b) => {
+      if (sortType === "lowest") {
+      return a.price-b.price
+    } else if (sortType === "highest") {
+      return b.price-a.price
+    } 
+    })
+    this.setState({ sortType });
+  }
+
   render() {
     return (
       <div>
@@ -49,6 +60,7 @@ class App extends Component {
                     updateSub={this.handleSub}
                     sortType={this.state.sortType}
                     listNum={this.state.listNum}
+                    onSort={this.onSort}
                   />
                 }
               />
