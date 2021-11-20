@@ -38,7 +38,8 @@ class App extends Component {
       return a.price-b.price
     } else if (sortType === "highest") {
       return b.price-a.price
-    } 
+    } else {
+      return a.id-b.id}
     })
     this.setState({ sortType });
   }
